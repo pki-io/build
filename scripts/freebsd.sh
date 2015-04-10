@@ -1,5 +1,17 @@
 #!/bin/sh
 set -eu
+# sanity checks
+OS=`uname`
+if [ $OS != "FreeBSD" ]
+then
+      echo "You need to run this script on FreeBSD"
+      exit 1
+fi
+if [ "$(id -u)" -ne "0" ]
+then
+    echo "This script requires root privileges" >&2
+    exit 1
+fi
 
 GO_PACKAGE="go1.4.1.freebsd-amd64.tar.gz"
 MAGIC=$(pwd)
@@ -7,8 +19,8 @@ echo *** Installing dependencies
 sudo pkg install -y git
 echo *** Changing to temp directory
 cd /tmp
-mkdir build.$$
-cd build.$$
+BUILD_DIR=`mktemp -d`
+cd $BUILD_DIR
 echo *** Installing bats
 git clone https://github.com/sstephenson/bats.git
 cd bats
@@ -30,4 +42,4 @@ echo *** Building binaries
 cd admin
 make
 test -e pki.io && cp pki.io $MAGIC
-rm -fr /tmp/build.$$
+rm -fr /tmp/$BUILD_DIR
