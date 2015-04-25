@@ -25,9 +25,13 @@ mkdir -p go/src
 cd go
 export GOPATH=$(pwd)
 export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
-go get github.com/mattn/gom
 
-
+echo *** Installing fdm
+FDM_PATH="$HOME/fdm"
+mkdir "$FDM_PATH"
+curl https://raw.githubusercontent.com/pki-io/fdm/master/fdm -o "$FDM_PATH/fdm"
+chmod +x "$FDM_PATH/fdm"
+export PATH="$PATH:$FDM_PATH"
 
 echo *** Cloning packages
 cd src
