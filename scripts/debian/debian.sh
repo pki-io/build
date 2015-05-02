@@ -3,7 +3,9 @@ set -e
 set -u
 
 GO_PACKAGE=go1.4.1.linux-amd64.tar.gz
-rm *.deb
+if [ -e *.deb ]; then
+	rm *.deb
+fi 
 cp $HOME/$GO_PACKAGE ./
 docker build -t=debian_jessie .
 rm $GO_PACKAGE
