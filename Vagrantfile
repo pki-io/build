@@ -16,6 +16,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     c.vm.provision "shell", path: "scripts/build/rhel_vagrant.sh"
   end
 
+  config.vm.define "freebsd-10-build" do |c|
+    c.vm.box = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_freebsd-10.1_chef-provisionerless.box"
+    c.vm.provision "shell", path: "scripts/build/freebsd_vagrant.sh"
+    c.vm.network :private_network, ip: "10.0.0.2"
+    c.vm.synced_folder ".", "/vagrant", :nfs => true
+    c.ssh.shell = 'sh'
+  end
+
   config.vm.define "debian-7-test" do |c|
     c.vm.box = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_debian-7.7_chef-provisionerless.box"
     c.vm.provision "shell", path: "scripts/test/debian_vagrant.sh"
@@ -26,4 +34,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     c.vm.provision "shell", path: "scripts/test/rhel_vagrant.sh"
   end
 
+  config.vm.define "freebsd-10-test" do |c|
+    c.vm.box = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_freebsd-10.1_chef-provisionerless.box"
+    c.vm.provision "shell", path: "scripts/test/freebsd_vagrant.sh"
+    c.vm.network :private_network, ip: "10.0.0.2"
+    c.vm.synced_folder ".", "/vagrant", :nfs => true
+    c.ssh.shell = 'sh'
+  end
 end

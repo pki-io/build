@@ -10,24 +10,33 @@ setup_project() {
 
 install_bats() {
   echo *** Installing bats
-  cd "$TMPDIR"
-  git clone https://github.com/sstephenson/bats.git
-  cd bats
-  sudo ./install.sh /usr/local
+  if [ -z "$(which bats)" ]; then
+    cd "$TMPDIR"
+    git clone https://github.com/sstephenson/bats.git
+    cd bats
+    sudo ./install.sh /usr/local
+  fi
 }
 
 clone_tests() {
   echo *** Cloning tests
   cd "$TMPDIR"
   test -d admin || git clone https://github.com/pki-io/admin.git
+  cd admin
+  git checkout "$VERSION"
 }
 
 run_tests() {
   cd "$TMPDIR"
+
+  # all.bats is a workaround to get things working on FreeBSD
   echo *** Running package tests
-  bats tests/
+  cat tests/*.bats > tests/all.bats
+  bats tests/all.bats
+  rm tests/all.bats
 
   echo *** Running tests from source
-  export PKIIO_CMD="/opt/pki.io/bin/pki.io"
-  bats admin/bats_tests/
+  cat admin/bats_tests/*.bats > admin/bats_tests/all.bats
+  bats admin/bats_tests/all.bats
+  rm admin/bats_tests/all.bats
 }

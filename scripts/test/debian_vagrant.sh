@@ -9,6 +9,7 @@ cd /vagrant/scripts/test
 setup_env() {
   echo *** Setting up environment
   cp -r /vagrant/tests "$TMPDIR/"
+  cp -r /vagrant/builds "$TMPDIR/"
 }
 
 main

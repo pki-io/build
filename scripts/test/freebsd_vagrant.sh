@@ -4,7 +4,7 @@ set -eu
 
 cd /vagrant/scripts/test
 
-. ./rhel.sh
+. ./freebsd.sh
 
 setup_env() {
   echo *** Setting up environment
