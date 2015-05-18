@@ -24,6 +24,7 @@ Clone and run the vagrant builds.
     $ git clone https://github.com/pki-io/build.git
     $ cd build
     $ ./vagrant_all.sh
+    $ ./native_osx.sh
     $ ls builds/
 
 You should see the built packages.
