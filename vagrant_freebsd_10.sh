@@ -2,6 +2,8 @@
 
 set -eu
 
+echo "Using version: $VERSION"
+
 echo Starting freebsd 10 build box
 vagrant up freebsd-10-build
 echo Destroying freebsd 10 build box

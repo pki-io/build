@@ -1,11 +1,11 @@
 . ./skel.sh
 
-export VERSION="0.1.0-release1"
+#export VERSION="0.1.1"
 export GO_VERSION="1.4.1"
 
 setup_project() {
-  echo *** Changing to temp directory
   export TMPDIR=$(mktemp -d)
+  echo *** Changing to temp directory $TMPDIR
   cd "$TMPDIR"
 }
 
@@ -48,7 +48,11 @@ clone_source() {
   cd "$SOURCEDIR"
   test -d admin || git clone https://github.com/pki-io/admin.git
   cd admin
-  git checkout "$VERSION"
+  if [[ "$VERSION" =~ "master" ]]; then
+    git checkout master
+  else
+    git checkout "$VERSION"
+  fi
 }
 
 build_source() {

@@ -2,6 +2,8 @@
 
 set -eu
 
+echo "Using version $VERSION"
+
 cd /vagrant/scripts/build
 
 . ./freebsd.sh

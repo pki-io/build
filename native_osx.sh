@@ -2,6 +2,13 @@
 
 set -eu
 
+mode="${1:-''}"
+if [ "$mode" == "dev" ]; then
+  export VERSION="0.1.1-master"
+else
+  export VERSION="0.1.1"
+fi
+
 export ORIGDIR="$PWD"
 
 cd scripts/build
