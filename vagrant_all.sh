@@ -4,9 +4,9 @@ set -eu
 
 mode="${1:-''}"
 if [ "$mode" == "dev" ]; then
-  export VERSION="0.1.1-master"
+  export VERSION="0.1.2-master"
 else
-  export VERSION="0.1.1-release1"
+  export VERSION="0.1.2-release1"
 fi
 
 ./vagrant_freebsd_10.sh

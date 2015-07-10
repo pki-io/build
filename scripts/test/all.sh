@@ -23,7 +23,7 @@ clone_tests() {
   cd "$TMPDIR"
   test -d admin || git clone https://github.com/pki-io/admin.git
   cd admin
-  if [[ "$VERSION" =~ "master" ]]; then
+  if [ $(echo "$VERSION" | grep -q "master") ]; then
     git checkout master
   else
     git checkout "$VERSION"
