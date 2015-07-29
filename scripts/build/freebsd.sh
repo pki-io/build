@@ -16,12 +16,12 @@ fi
 #fi
 
 install_deps() {
-  echo *** Installing dependencies
+  echo "*** Installing dependencies"
   sudo pkg install -y bash git curl
 }
 
 build_packages() {
-  echo *** Building packages
+  echo "*** Building packages"
   cd "$TMPDIR"
   if [ -e opt ]; then
     rm -fr opt
@@ -30,7 +30,7 @@ build_packages() {
   cp "$SOURCEDIR/admin/pki.io" opt/pki.io/bin/
   chmod +x opt/pki.io/bin/pki.io
 
-  echo *** Building tar.gz
+  echo "*** Building tar.gz"
   cd opt
   tar czvf "pki.io_${VERSION}_freebsd_amd64.tar.gz" pki.io
 }

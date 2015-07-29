@@ -7,7 +7,7 @@ cd /vagrant/scripts/build
 . ./rhel.sh
 
 publish_packages() {
-  echo *** Publishing packages
+  echo "*** Publishing packages"
   cd "$TMPDIR"
   mkdir -p /vagrant/builds/
   RPM_VERSION=$(echo "$VERSION" | sed 's/-/_/g')

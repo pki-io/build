@@ -7,7 +7,7 @@ cd /vagrant/scripts/build
 . ./debian.sh
 
 publish_packages() {
-  echo *** Publishing packages
+  echo "*** Publishing packages"
   cd "$TMPDIR"
   mkdir -p /vagrant/builds/
   mv "pki.io_${VERSION}_amd64.deb" /vagrant/builds/

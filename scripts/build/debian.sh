@@ -1,7 +1,7 @@
 . ./linux.sh
 
 install_deps() {
-  echo *** Installing dependencies
+  echo "*** Installing dependencies"
   sudo apt-get update -y
   sudo apt-get upgrade -y
   sudo apt-get install -y git ruby build-essential ruby-dev curl
@@ -9,7 +9,7 @@ install_deps() {
 }
 
 build_packages() {
-  echo *** Building packages
+  echo "*** Building packages"
   cd "$TMPDIR"
   if [ -e opt ]; then
     rm -fr opt
@@ -18,10 +18,10 @@ build_packages() {
   cp "$SOURCEDIR/admin/pki.io" opt/pki.io/bin/
   chmod +x opt/pki.io/bin/pki.io
 
-  echo *** Building Deb
+  echo "*** Building Deb"
   fpm -s dir -t deb -v "$VERSION" -n pki.io opt
 
-  echo *** Building tar.gz
+  echo "*** Building tar.gz"
   cd opt
   tar czvf "pki.io_${VERSION}_linux_amd64.tar.gz" pki.io
 }

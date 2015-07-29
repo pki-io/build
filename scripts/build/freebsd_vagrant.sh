@@ -9,7 +9,7 @@ cd /vagrant/scripts/build
 . ./freebsd.sh
 
 publish_packages() {
-  echo *** Publishing packages
+  echo "*** Publishing packages"
   cd "$TMPDIR"
   mkdir -p /vagrant/builds/
   mv "opt/pki.io_${VERSION}_freebsd_amd64.tar.gz" /vagrant/builds/

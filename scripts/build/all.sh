@@ -1,16 +1,15 @@
 . ./skel.sh
 
-#export VERSION="0.1.1"
 export GO_VERSION="1.4.1"
+export TMPDIR=$(mktemp -d)
 
 setup_project() {
-  export TMPDIR=$(mktemp -d)
-  echo *** Changing to temp directory $TMPDIR
+  echo "*** Changing to temp directory $TMPDIR"
   cd "$TMPDIR"
 }
 
 install_bats() {
-  echo *** Installing bats
+  echo "*** Installing bats"
   cd "$TMPDIR"
   if [ -z "$(which bats)" ]; then
     git clone https://github.com/sstephenson/bats.git
@@ -20,7 +19,7 @@ install_bats() {
 }
 
 install_go() {
-  echo *** Downloading and installing Go
+  echo "*** Downloading and installing Go"
   cd "$TMPDIR"
   if [ ! -d /usr/local/go ]; then
     test -e "$GO_PACKAGE" || curl -sO "https://storage.googleapis.com/golang/$GO_PACKAGE"
@@ -29,7 +28,7 @@ install_go() {
 }
 
 install_fdm() {
-  echo *** Installing fdm
+  echo "*** Installing fdm"
   cd "$TMPDIR"
   mkdir fdm
   curl https://raw.githubusercontent.com/pki-io/fdm/master/fdm -o "fdm/fdm"
@@ -38,7 +37,7 @@ install_fdm() {
 }
 
 clone_source() {
-  echo *** Cloning source
+  echo "*** Cloning source"
   cd "$TMPDIR"
   export SOURCEDIR="$TMPDIR/go/src/github.com/pki-io"
   mkdir -p "$SOURCEDIR"
@@ -48,15 +47,17 @@ clone_source() {
   cd "$SOURCEDIR"
   test -d admin || git clone https://github.com/pki-io/admin.git
   cd admin
-  if [ $(echo "$VERSION" | grep -q "master") ]; then
+  if [ "$(echo $VERSION | grep master)" != "" ]; then
     git checkout master
+  elif [ "$(echo $VERSION | grep development)" != "" ]; then
+    git checkout development
   else
     git checkout "$VERSION"
   fi
 }
 
 build_source() {
-  echo *** Building source
+  echo "*** Building source"
   cd "$SOURCEDIR/admin"
   make
 }

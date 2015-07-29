@@ -5,7 +5,7 @@ set -eu
 . ./osx.sh
 
 publish_packages() {
-  echo *** Publishing packages
+  echo "*** Publishing packages"
   cd "$TMPDIR"
   mkdir -p "$ORIGDIR/builds/"
   mv "opt/pki.io_${VERSION}_darwin_amd64.tar.gz" "$ORIGDIR/builds/"
