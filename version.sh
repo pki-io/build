@@ -1,8 +1,8 @@
 #!/bin/sh
 
-CURRENT_STABLE="0.1.2-release1"
-version="${1:-''}"
-if [ "$version" != "" ]; then
+CURRENT_STABLE="0.1.3-release1"
+version=${1:-""}
+if [ -n "$version" ]; then
   export VERSION="$version"
 else
   export VERSION="$CURRENT_STABLE"
