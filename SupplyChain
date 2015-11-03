@@ -12,3 +12,4 @@ sc -r "git@github.com:xeipuuv/gojsonreference" -f "git@github.com:pki-io/gojsonr
 sc -r "git@github.com:docopt/docopt.go"        -f "git@github.com:pki-io/docopt.go"
 sc -r "git@github.com:mitchellh/go-homedir"    -f "git@github.com:pki-io/go-homedir"
 sc -r "git@github.com:stretchr/objx"           -f "git@github.com:pki-io/objx"
+sc -r "git@github.com:jawher/mow.cli"          -f "git@github.com:pki-io/mow.cli"
